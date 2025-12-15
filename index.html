@@ -1,10 +1,4 @@
 <!DOCTYPE HTML>
-<style>
-  #full {
-    display: none;
-  }
-</style>
-
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,6 +9,84 @@
   
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <link rel="icon" type="image/png" href="Images/icon.png">
+
+  <style>
+    /* 网页背景改为极淡的灰色，让白色卡片更凸显 */
+    body {
+        background-color: #f9f9f9;
+        font-family: 'Lato', Verdana, Helvetica, sans-serif;
+        color: #333;
+    }
+
+    #full {
+      display: none;
+    }
+
+    /* --- 核心样式：论文卡片 (带图) --- */
+    .paper-card {
+        width: 100%;
+        background-color: #ffffff;
+        border: 1px solid #e0e0e0; /* 灰色边框 */
+        border-radius: 12px;       /* 圆角 */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* 立体阴影 */
+        margin-bottom: 25px;       /* 卡片之间的间距 */
+        padding: 20px;             /* 卡片内部留白 */
+        border-spacing: 0;
+        border-collapse: separate;
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* 动画过渡 */
+    }
+
+    /* 鼠标悬停时的效果：上浮 + 阴影加深 */
+    .paper-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+        border-color: #d1d1d1;
+    }
+
+    /* --- 核心样式：其他论文卡片 (纯文字) --- */
+    .paper-card-simple {
+        background-color: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-left: 5px solid #888; /* 左侧加深条纹，增加设计感 */
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        margin-bottom: 15px;
+        padding: 15px 20px;
+        transition: all 0.2s ease;
+    }
+
+    .paper-card-simple:hover {
+        transform: translateX(5px); /* 悬停时轻微右移 */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        background-color: #fffdfd;
+    }
+
+    /* 统一图片样式 */
+    .paper-img {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    /* 链接颜色优化 */
+    a {
+        text-decoration: none;
+        color: #1a73e8;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* 个人资料区域卡片化 (可选，保持风格统一) */
+    .profile-section {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        margin-bottom: 40px;
+    }
+  </style>
 </head>
 
 <body>
@@ -22,243 +94,249 @@
     <tbody>
       <tr>
         <td style="padding:0px">
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr>
-                <td style="padding:2.5%;width:60%;vertical-align:middle">
-                  <p style="text-align:center"><name>Hao Lu</name></p>
-                  <p>I am a third-year Ph.D. student at The Hong Kong University of Science and Technology (Guangzhou), supervised by <a href="https://www.yingcong.me/">Dr. Yingcong Chen</a>.
-                    Before that, I received the joint M.S. degree with the University and Chinese Academy of Sciences (UCAS), and the Institute of Computing Technology (ICT), 
-                    Chinese Academy of Sciences under the supervision of Prof. <a href="https://sites.google.com/site/huhanhomepage">Dr. Hu Han</a> and <a href="https://scholar.google.com.hk/citations?user=8eNm2GMAAAAJ&hl=en">Dr. S. Kevin Zhou</a> in 2022.
-                    I also had the privilege of working closely with <a href="https://scholar.google.com.hk/citations?user=Vkzd7MIAAAAJ&hl=en">Dr. Shiguang Shan</a> and <a href="https://scholar.google.com.hk/citations?user=vVx2v20AAAAJ&hl=en">Dr. Xilin Chen</a>.
-                  </p>
-                  
-                  <p>I am generally interested in artificial intelligence and deep learning. My current research focuses on:</p>
-                  
-                 <ul>
-                    <li>🦙 <b style="color:brown">Multimodal Large Model</b></li>
-                    <li>🛠️ <b style="color:green">4D Reconstruction and Generation</b></li>
-                    <li>🚗 <b style="color:orange">Autonomous Driving</b></li>
-                    <li>🔬 <b style="color:blue">AI for Science</b></li>
-                </ul>
+          
+          <!-- 个人简介部分 -->
+          <div class="profile-section">
+            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+                <tbody>
+                <tr>
+                    <td style="padding:2.5%;width:60%;vertical-align:middle">
+                    <p style="text-align:center; font-size:1.5em; font-weight:bold;"><name>Hao Lu</name></p>
+                    <p>I am a third-year Ph.D. student at The Hong Kong University of Science and Technology (Guangzhou), supervised by <a href="https://www.yingcong.me/">Dr. Yingcong Chen</a>.
+                        Before that, I received the joint M.S. degree with the University and Chinese Academy of Sciences (UCAS), and the Institute of Computing Technology (ICT), 
+                        Chinese Academy of Sciences under the supervision of Prof. <a href="https://sites.google.com/site/huhanhomepage">Dr. Hu Han</a> and <a href="https://scholar.google.com.hk/citations?user=8eNm2GMAAAAJ&hl=en">Dr. S. Kevin Zhou</a> in 2022.
+                        I also had the privilege of working closely with <a href="https://scholar.google.com.hk/citations?user=Vkzd7MIAAAAJ&hl=en">Dr. Shiguang Shan</a> and <a href="https://scholar.google.com.hk/citations?user=vVx2v20AAAAJ&hl=en">Dr. Xilin Chen</a>.
+                    </p>
+                    
+                    <p>I am generally interested in artificial intelligence and deep learning. My current research focuses on:</p>
+                    
+                    <ul>
+                        <li>🦙 <b style="color:brown">Multimodal Large Model</b></li>
+                        <li>🛠️ <b style="color:green">4D Reconstruction and Generation</b></li>
+                        <li>🚗 <b style="color:orange">Autonomous Driving</b></li>
+                        <li>🔬 <b style="color:blue">AI for Science</b></li>
+                    </ul>
 
-                  <p style="text-align:center">
-                    <a href="mailto:hlu585@connect.hkust-gz.edu.cn">Email</a> &nbsp;/&nbsp
-                    <a href="https://scholar.google.com.hk/citations?user=OrbGCGkAAAAJ&hl=en">Google Scholar</a> 
-                  </p>
-<!--                   <b style="color:black">If you're interested or have questions about my research, feel free to drop me an email at hlu585@connect.hkust-gz.edu.cn.</b> -->
+                    <p style="text-align:center">
+                        <a href="mailto:hlu585@connect.hkust-gz.edu.cn">Email</a> &nbsp;/&nbsp
+                        <a href="https://scholar.google.com.hk/citations?user=OrbGCGkAAAAJ&hl=en">Google Scholar</a> 
+                    </p>
+                    </td>
+                    <td style="padding:2.5%;width:30%;max-width:30%">
+                    <img style="width:100%; border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt="profile photo" src="Images/luhao.jpg">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+          </div>
 
-                </td>
-                <td style="padding:2.5%;width:30%;max-width:30%">
-                  <img style="width:50%;max-width:50%" alt="profile photo" src="Images/luhao.jpg">
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-       
           <!-- Selected Papers Section -->
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
               <tr>
                 <td style="text-indent:20px;width:100%;vertical-align:middle">
                   <p><heading>Selected Papers <a href="https://scholar.google.com.hk/citations?user=OrbGCGkAAAAJ&hl=en"> [Full List] </a></heading></p>
-                  <!-- Add your papers here -->
-                  <ul>
-                    <!-- More papers can be added -->
-                  </ul>
                 </td>
               </tr>
             </tbody>
           </table>
 
+          <!-- 
+             每个论文现在都被包裹在一个独立的 <table class="paper-card"> 中 
+             这实现了你想要的“独立小格子”和“立体感灰色边框”
+          -->
 
-
-    <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>    
-                      <tr>
-                        <td style="ppadding:5px;width:15%;max-width:15%" align="center">
-                          <img style="width:100%;max-width:100%" src="Images/DriveRecon.gif" alt="dise">
-                        </td>
-                        <td width="75%" valign="center">
-                          <papertitle style="font-size: 1.05rem;">DrivingRecon: Large 4D Gaussian Reconstruction Model For Autonomous Driving.</papertitle><br>
-                          <b>Hao Lu</b>, Tianshuo Xu, Wenzhao Zheng, Yunpeng Zhang, et al.
-                          <em><strong>NeurIPS 2025</strong></em>.
-                          <br>
-                          <a href="https://arxiv.org/pdf/2412.09043">[Paper]</a>
-                          <a href="https://github.com/EnVision-Research/DriveRecon">[Code]</a>
-                       
-                          <br>
-                        </td>
-                      </tr>
-                      
-                     
-                      
-                      <tr>
-                        <td style="ppadding:5px;width:15%;max-width:15%" align="center">
-                          <img style="width:100%;max-width:100%" src="Images/Period.jpg" alt="dise">
-                        </td>
-                        <td width="75%" valign="center">
-                          <papertitle style="font-size: 1.05rem;">Period-LLM: Extending the Periodic Capability of Multimodal Large Language Model.</papertitle><br>
-                          Yuting Zhang*, <b>Hao Lu*</b>, Qingyong Hu, Yin Wang, et al.
-                          <em><strong>CVPR 2025</strong></em>.
-                          <br>
-                          <a href="https://arxiv.org/pdf/2505.24476">[Paper]</a>
-                          <a href="https://github.com/keke-nice/Period-LLM">[Code]</a>
-                         
-                          <br>
-                        </td>
-                      </tr>
-
-
-                    <tr>
-                        <td style="ppadding:5px;width:15%;max-width:15%" align="center">
-                            <img style="width:100%;max-width:100%" src="Images/Hawk.jpg" alt="dise">
-                        </td>
-                        <td width="75%" valign="center">
-                            <papertitle style="font-size: 1.05rem;">Hawk: Learning to Understand Open-World Video Anomalies.</papertitle><br>
-                            Jiaqi Tang*, <b>Hao Lu*</b>, Ruizheng Wu, Xiaogang Xu, et al.
-                            <em><strong>NeurIPS 2024</strong></em>
-                            <br>
-                            <a href="https://arxiv.org/pdf/2405.16886">[Paper]</a>
-                            <a href="https://github.com/jqtangust/hawk">[Code]</a>
-                           
-                            <br>
-                        </td>
-                    </tr>
-
-        <tr>
-                        <td style="padding:20px;width:30%;max-width:30%" align="center">
-                          <img style="width:100%;max-width:100%" src="Images/Sage.jpg" alt="dise">
-                        </td>
-                        <td width="75%" valign="center">
-                          <papertitle style="font-size: 1.05rem;">Sage Deer: A Super-Aligned Driving Generalist Is Your Cockpit.</papertitle><br>
-                          <b>Hao Lu*</b>, Jiaqi Tang*, Jiyao Wang, Yunfan Lu, et al.
-                          <em><strong>preprint</strong></em>. 
-                          <br>
-<!--                           <a href="https://arxiv.org/abs/2505.10257">[Paper]</a>
- -->
-                          <br>
-                        </td>
-                      </tr>
-
-                    <tr>
-                        <td style="ppadding:5px;width:15%;max-width:15%" align="center">
-                          <img style="width:100%;max-width:100%" src="Images/GenAD.jpg" alt="dise">
-                        </td>
-                        <td width="75%" valign="center">
-                          <papertitle style="font-size: 1.05rem;">Towards Generalizable Multi-Camera 3D Object Detection via Perspective Debiasing.</papertitle><br>
-                          <b>Hao Lu</b>, Yunpeng Zhang, Qing Lian, Dalong Du, et al.
-                          <em><strong>AAAI 2024</strong></em>.
-                          <br>
-                          <a href="https://arxiv.org/pdf/2310.11346">[Paper]</a>
-                          <a href="https://github.com/EnVision-Research/Generalizable-BEV">[Code]</a>
-                         
-                          <br>
-                        </td>
-                      </tr>
-      
-                    <tr>
-                        <td style="ppadding:5px;width:15%;max-width:15%" align="center">
-                            <img style="width:100%;max-width:100%" src="Images/Scale.png" alt="dise">
-                        </td>
-                        <td width="75%" valign="center">
-                            <papertitle style="font-size: 1.05rem;">Scaling Multi-Camera 3D Object Detection through Weak-to-Strong Eliciting.</papertitle><br>
-                            <b>Hao Lu</b>, Jiaqi Tang, Xinli Xu, Xu Cao, et al.
-                            (preprint)
-                            <br>
-                            <a href="https://arxiv.org/pdf/2404.06700">[Paper]</a>
-                            <a href="https://github.com/EnVision-Research/Scale-BEV">[Code]</a>
-                            
-                            <br>
-                        </td>
-                    </tr>
-      
-                    <tr>
-                        <td style="ppadding:5px;width:15%;max-width:15%" align="center">
-                            <img style="width:100%;max-width:100%" src="Images/Hiba.jpg" alt="dise">
-                        </td>
-                        <td width="75%" valign="center">
-                            <papertitle style="font-size: 1.05rem;">rPPG-HiBa: Hierarchical Balanced Framework for Remote Physiological Measurement.</papertitle><br>
-                            Yin Wang*, <b>Hao Lu*</b>, Li Kuang, Mengchu Zhou, et al.
-                            <em><strong>ACM MM 2024</strong></em>
-                            <br>
-                            <a href="https://openreview.net/pdf?id=kckxgbOogx">[Paper]</a>
-                           
-                            <br>
-                        </td>
-                    </tr>
-                  
-                    <tr>
-                        <td style="ppadding:5px;width:15%;max-width:15%" align="center">
-                            <img style="width:100%;max-width:100%" src="Images/GPT.jpg" alt="dise">
-                        </td>
-                        <td width="75%" valign="center">
-                            <papertitle style="font-size: 1.05rem;">GPT as Psychologist? Preliminary Evaluations for GPT-4V on Visual Affective Computing.</papertitle><br>
-                            <b>Hao Lu*</b>, Xuesong Niu*, Jiyao Wang*, Yin Wang*, Qingyong Hu* et al.
-                            <em><strong>CVPR Workshops 2024</strong></em>
-                            <br>
-                            <a href="https://arxiv.org/abs/2403.05916">[Paper]</a>
-                            <a href="https://github.com/EnVision-Research/GPT4Affectivity">[Code]</a>
-                          
-                            <br>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="ppadding:5px;width:15%;max-width:15%" align="center">
-                            <img style="width:100%;max-width:100%" src="Images/NEST.jpg" alt="dise">
-                        </td>
-                        <td width="75%" valign="center">
-                            <papertitle style="font-size: 1.05rem;">Neuron Structure Modeling for Generalizable Remote Physiological Measurement.</papertitle><br>
-                            <b>Hao Lu</b>, Zitong Yu, Xuesong Niu, Yingcong Chen.
-                            <em><strong>CVPR 2023</strong></em>
-                            <br>
-                            <a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Lu_Neuron_Structure_Modeling_for_Generalizable_Remote_Physiological_Measurement_CVPR_2023_paper.pdf">[Paper]</a>
-                            <a href="https://github.com/EnVision-Research/NEST-rPPG">[Code]</a>
-                            
-                            <br>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="ppadding:5px;width:15%;max-width:15%" align="center">
-                            <img style="width:100%;max-width:100%" src="Images/Dual.jpg" alt="dise">
-                        </td>
-                        <td width="75%" valign="center">
-                            <papertitle style="font-size: 1.05rem;">Dual-GAN: Joint BVP and Noise modelling for Remote Physiological Measurement.</papertitle><br>
-                            <b>Hao Lu</b>, Hu Han, S. Kevin Zhou.
-                            <em><strong>CVPR 2021</strong></em>
-                            <br>
-                            <a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Lu_Dual-GAN_Joint_BVP_and_Noise_Modeling_for_Remote_Physiological_Measurement_CVPR_2021_paper.pdf">[Paper]</a>
-                           
-                            <br>
-                        </td>
-                    </tr>
-    </tbody></table>
-
-<!-- <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr>
-                <td style="text-indent:20px;width:100%;vertical-align:middle">
-                  <p><heading>Other Co-Author Papers</heading></p>
-                  <ul>
-                    <li>Tianshuo Xu, <strong>Hao Lu</strong>, XU Yan, Yingjie Cai, et al. <br>Occ-LLM: Enhancing Autonomous Driving with Occupancy-Based Large Language Models. <br>ICRA 2025.</li>
-                    <li>Jiaqi Tang, <strong>Hao Lu</strong>, Xiaogang Xu, Ruizheng Wu, et al. <br>An Incremental Unified Framework for Small Defect Inspection. <br>ECCV 2024.</li>
-                    <li>Haodong Li, <strong>Hao Lu</strong>, Yingcong Chen. <br>Bi-TTA: Bidirectional Test-Time Adapter for Remote Physiological Measurement. <br>ECCV 2024.</li>
-                    <li>Jiyao Wang, <strong>Hao Lu</strong>, Hu Han, Yingcong Chen, et al. <br>Generalizable Remote Physiological Measurement via Semantic-Sheltered Alignment and Plausible Style Randomization. <br>IEEE JBHI 2024.</li>
-                    <li>Jiyao Wang, <strong>Hao Lu</strong>, Ange Wang, Yingcong Chen, et al. <br>Hierarchical Style-Aware Domain Generalization for Remote Physiological Measurement. <br>IEEE TIM 2024.</li>
-                    <li>Weiyu Sun, Xinyu Zhang, <strong>Hao LU</strong>, Ying-Cong Chen, et al. <br>Backdoor Contrastive Learning via Bi-level Trigger Optimization. <br>ICLR 2024.</li>
-                    <li>Weiyu Sun, Xinyu Zhang, <strong>Hao Lu</strong>, Ying Chen, Yun Ge, et al. <br>Resolve Domain Conflicts for Generalizable Remote Physiological Measurement. <br>ACM MM 2023.</li>
-                    <li>Xinyu Zhang, Weiyu Sun, <strong>Hao Lu</strong>, Ying Chen, et al. <br>Self-similarity Prior Distillation for Unsupervised Remote Physiological Measurement. <br>TMM 2023.<li>
-                    <li>Qingyong Hu, Qian Zhang, <strong>Hao Lu</strong>, Shun Wu, et al.  <br>Contactless Arterial Blood Pressure Waveform Monitoring with mmWave Radar. <br>ACM IMWUT 2024.</li>
-                    <li>Xin Liu, Yuting Zhang, Zitong Yu, <strong>Hao Lu</strong>, et al.  <br>rPPG-MAE: Self-supervised Pre-training with Masked Autoencoders for Remote Physiological Measurement. <br>TMM, 2024.</li>
-                    <li>XiaoBai Li, Hu Han, <strong>Hao Lu</strong>, et al. <br>The 1st Challenge on Remote Physiological Signal Sensing. <br>CVPR Workshops 2020: 314-315.</li>
-                  </ul>
+          <!-- Paper 1 -->
+          <table class="paper-card">
+            <tbody>    
+                <tr>
+                <td style="padding:10px;width:25%;vertical-align:middle" align="center">
+                    <img class="paper-img" src="Images/DriveRecon.gif" alt="dise">
                 </td>
-              </tr>
+                <td style="padding:10px;width:75%;vertical-align:middle">
+                    <papertitle style="font-size: 1.1rem; font-weight: bold;">DrivingRecon: Large 4D Gaussian Reconstruction Model For Autonomous Driving.</papertitle><br>
+                    <b>Hao Lu</b>, Tianshuo Xu, Wenzhao Zheng, Yunpeng Zhang, et al.
+                    <br><em><strong>NeurIPS 2025</strong></em>.
+                    <br>
+                    <a href="https://arxiv.org/pdf/2412.09043">[Paper]</a>
+                    <a href="https://github.com/EnVision-Research/DriveRecon">[Code]</a>
+                </td>
+                </tr>
             </tbody>
           </table>
- -->
-<br><br><br>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+
+          <!-- Paper 2 -->
+          <table class="paper-card">
+            <tbody>    
+                <tr>
+                <td style="padding:10px;width:25%;vertical-align:middle" align="center">
+                    <img class="paper-img" src="Images/Period.jpg" alt="dise">
+                </td>
+                <td style="padding:10px;width:75%;vertical-align:middle">
+                    <papertitle style="font-size: 1.1rem; font-weight: bold;">Period-LLM: Extending the Periodic Capability of Multimodal Large Language Model.</papertitle><br>
+                    Yuting Zhang*, <b>Hao Lu*</b>, Qingyong Hu, Yin Wang, et al.
+                    <br><em><strong>CVPR 2025</strong></em>.
+                    <br>
+                    <a href="https://arxiv.org/pdf/2505.24476">[Paper]</a>
+                    <a href="https://github.com/keke-nice/Period-LLM">[Code]</a>
+                </td>
+                </tr>
+            </tbody>
+          </table>
+
+          <!-- Paper 3 -->
+          <table class="paper-card">
+            <tbody>    
+                <tr>
+                <td style="padding:10px;width:25%;vertical-align:middle" align="center">
+                    <img class="paper-img" src="Images/Hawk.jpg" alt="dise">
+                </td>
+                <td style="padding:10px;width:75%;vertical-align:middle">
+                    <papertitle style="font-size: 1.1rem; font-weight: bold;">Hawk: Learning to Understand Open-World Video Anomalies.</papertitle><br>
+                    Jiaqi Tang*, <b>Hao Lu*</b>, Ruizheng Wu, Xiaogang Xu, et al.
+                    <br><em><strong>NeurIPS 2024</strong></em>
+                    <br>
+                    <a href="https://arxiv.org/pdf/2405.16886">[Paper]</a>
+                    <a href="https://github.com/jqtangust/hawk">[Code]</a>
+                </td>
+                </tr>
+            </tbody>
+          </table>
+
+          <!-- Paper 4 -->
+          <table class="paper-card">
+            <tbody>    
+                <tr>
+                <td style="padding:10px;width:25%;vertical-align:middle" align="center">
+                    <img class="paper-img" src="Images/Sage.jpg" alt="dise">
+                </td>
+                <td style="padding:10px;width:75%;vertical-align:middle">
+                    <papertitle style="font-size: 1.1rem; font-weight: bold;">Sage Deer: A Super-Aligned Driving Generalist Is Your Cockpit.</papertitle><br>
+                    <b>Hao Lu*</b>, Jiaqi Tang*, Jiyao Wang, Yunfan Lu, et al.
+                    <br><em><strong>preprint</strong></em>. 
+                    <br>
+                    <!-- <a href="https://arxiv.org/abs/2505.10257">[Paper]</a> -->
+                </td>
+                </tr>
+            </tbody>
+          </table>
+
+          <!-- Paper 5 -->
+          <table class="paper-card">
+            <tbody>    
+                <tr>
+                <td style="padding:10px;width:25%;vertical-align:middle" align="center">
+                    <img class="paper-img" src="Images/GenAD.jpg" alt="dise">
+                </td>
+                <td style="padding:10px;width:75%;vertical-align:middle">
+                    <papertitle style="font-size: 1.1rem; font-weight: bold;">Towards Generalizable Multi-Camera 3D Object Detection via Perspective Debiasing.</papertitle><br>
+                    <b>Hao Lu</b>, Yunpeng Zhang, Qing Lian, Dalong Du, et al.
+                    <br><em><strong>AAAI 2024</strong></em>.
+                    <br>
+                    <a href="https://arxiv.org/pdf/2310.11346">[Paper]</a>
+                    <a href="https://github.com/EnVision-Research/Generalizable-BEV">[Code]</a>
+                </td>
+                </tr>
+            </tbody>
+          </table>
+
+          <!-- Paper 6 -->
+          <table class="paper-card">
+            <tbody>    
+                <tr>
+                <td style="padding:10px;width:25%;vertical-align:middle" align="center">
+                    <img class="paper-img" src="Images/Scale.png" alt="dise">
+                </td>
+                <td style="padding:10px;width:75%;vertical-align:middle">
+                    <papertitle style="font-size: 1.1rem; font-weight: bold;">Scaling Multi-Camera 3D Object Detection through Weak-to-Strong Eliciting.</papertitle><br>
+                    <b>Hao Lu</b>, Jiaqi Tang, Xinli Xu, Xu Cao, et al.
+                    <br>(preprint)
+                    <br>
+                    <a href="https://arxiv.org/pdf/2404.06700">[Paper]</a>
+                    <a href="https://github.com/EnVision-Research/Scale-BEV">[Code]</a>
+                </td>
+                </tr>
+            </tbody>
+          </table>
+
+          <!-- Paper 7 -->
+          <table class="paper-card">
+            <tbody>    
+                <tr>
+                <td style="padding:10px;width:25%;vertical-align:middle" align="center">
+                    <img class="paper-img" src="Images/Hiba.jpg" alt="dise">
+                </td>
+                <td style="padding:10px;width:75%;vertical-align:middle">
+                    <papertitle style="font-size: 1.1rem; font-weight: bold;">rPPG-HiBa: Hierarchical Balanced Framework for Remote Physiological Measurement.</papertitle><br>
+                    Yin Wang*, <b>Hao Lu*</b>, Li Kuang, Mengchu Zhou, et al.
+                    <br><em><strong>ACM MM 2024</strong></em>
+                    <br>
+                    <a href="https://openreview.net/pdf?id=kckxgbOogx">[Paper]</a>
+                </td>
+                </tr>
+            </tbody>
+          </table>
+
+          <!-- Paper 8 -->
+          <table class="paper-card">
+            <tbody>    
+                <tr>
+                <td style="padding:10px;width:25%;vertical-align:middle" align="center">
+                    <img class="paper-img" src="Images/GPT.jpg" alt="dise">
+                </td>
+                <td style="padding:10px;width:75%;vertical-align:middle">
+                    <papertitle style="font-size: 1.1rem; font-weight: bold;">GPT as Psychologist? Preliminary Evaluations for GPT-4V on Visual Affective Computing.</papertitle><br>
+                    <b>Hao Lu*</b>, Xuesong Niu*, Jiyao Wang*, Yin Wang*, Qingyong Hu* et al.
+                    <br><em><strong>CVPR Workshops 2024</strong></em>
+                    <br>
+                    <a href="https://arxiv.org/abs/2403.05916">[Paper]</a>
+                    <a href="https://github.com/EnVision-Research/GPT4Affectivity">[Code]</a>
+                </td>
+                </tr>
+            </tbody>
+          </table>
+
+          <!-- Paper 9 -->
+          <table class="paper-card">
+            <tbody>    
+                <tr>
+                <td style="padding:10px;width:25%;vertical-align:middle" align="center">
+                    <img class="paper-img" src="Images/NEST.jpg" alt="dise">
+                </td>
+                <td style="padding:10px;width:75%;vertical-align:middle">
+                    <papertitle style="font-size: 1.1rem; font-weight: bold;">Neuron Structure Modeling for Generalizable Remote Physiological Measurement.</papertitle><br>
+                    <b>Hao Lu</b>, Zitong Yu, Xuesong Niu, Yingcong Chen.
+                    <br><em><strong>CVPR 2023</strong></em>
+                    <br>
+                    <a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Lu_Neuron_Structure_Modeling_for_Generalizable_Remote_Physiological_Measurement_CVPR_2023_paper.pdf">[Paper]</a>
+                    <a href="https://github.com/EnVision-Research/NEST-rPPG">[Code]</a>
+                </td>
+                </tr>
+            </tbody>
+          </table>
+
+          <!-- Paper 10 -->
+          <table class="paper-card">
+            <tbody>    
+                <tr>
+                <td style="padding:10px;width:25%;vertical-align:middle" align="center">
+                    <img class="paper-img" src="Images/Dual.jpg" alt="dise">
+                </td>
+                <td style="padding:10px;width:75%;vertical-align:middle">
+                    <papertitle style="font-size: 1.1rem; font-weight: bold;">Dual-GAN: Joint BVP and Noise modelling for Remote Physiological Measurement.</papertitle><br>
+                    <b>Hao Lu</b>, Hu Han, S. Kevin Zhou.
+                    <br><em><strong>CVPR 2021</strong></em>
+                    <br>
+                    <a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Lu_Dual-GAN_Joint_BVP_and_Noise_Modeling_for_Remote_Physiological_Measurement_CVPR_2021_paper.pdf">[Paper]</a>
+                </td>
+                </tr>
+            </tbody>
+          </table>
+
+          <br><br>
+
+          <!-- Other Papers Section -->
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
               <tr>
                 <td style="text-indent:20px;width:100%;vertical-align:middle">
@@ -268,104 +346,102 @@
             </tbody>
           </table>
       
-          <table style="width:100%; border-collapse: collapse; margin: 0 auto;">
-  <tbody>
-    <tr>
-      <td style="text-indent: 20px; vertical-align: middle;">
-        <ul style="list-style-type: none; padding: 0;">
-           <li style="margin-bottom: 15px;">
-            Yifan Liu, Keyu Fan, Weihao Yu, Chenxin Li, <strong>Hao Lu</strong>, Yixuan Yuan.<br>
-            <em>MonoSplat: Generalizable 3D Gaussian Splatting from Monocular Depth Foundation Models.</em><br>
-            CVPR 2025.
-          </li>
-          <li style="margin-bottom: 15px;">
-            Tianshuo Xu, <strong>Hao Lu</strong>, XU Yan, Yingjie Cai, et al.<br>
-            <em>Occ-LLM: Enhancing Autonomous Driving with Occupancy-Based Large Language Models.</em><br>
-            ICRA 2025.
-          </li>
-          <li style="margin-bottom: 15px;">
-            Jiaqi Tang, <strong>Hao Lu</strong>, Xiaogang Xu, Ruizheng Wu, et al.<br>
-            <em>An Incremental Unified Framework for Small Defect Inspection.</em><br>
-            ECCV 2024.
-          </li>
-          <li style="margin-bottom: 15px;">
-            Haodong Li, <strong>Hao Lu</strong>, Yingcong Chen.<br>
-            <em>Bi-TTA: Bidirectional Test-Time Adapter for Remote Physiological Measurement.</em><br>
-            ECCV 2024.
-          </li>
-          <li style="margin-bottom: 15px;">
-            Jiyao Wang, <strong>Hao Lu</strong>, Hu Han, Yingcong Chen, et al.<br>
-            <em>Generalizable Remote Physiological Measurement via Semantic-Sheltered Alignment and Plausible Style Randomization.</em><br>
-            IEEE JBHI 2024.
-          </li>
-          <li style="margin-bottom: 15px;">
-            Jiyao Wang, <strong>Hao Lu</strong>, Ange Wang, Yingcong Chen, et al.<br>
-            <em>Hierarchical Style-Aware Domain Generalization for Remote Physiological Measurement.</em><br>
-            IEEE TIM 2024.
-          </li>
-          <li style="margin-bottom: 15px;">
-            Weiyu Sun, Xinyu Zhang, <strong>Hao Lu</strong>, Ying-Cong Chen, et al.<br>
-            <em>Backdoor Contrastive Learning via Bi-level Trigger Optimization.</em><br>
-            ICLR 2024.
-          </li>
-          <li style="margin-bottom: 15px;">
-            Weiyu Sun, Xinyu Zhang, <strong>Hao Lu</strong>, Ying Chen, Yun Ge, et al.<br>
-            <em>Resolve Domain Conflicts for Generalizable Remote Physiological Measurement.</em><br>
-            ACM MM 2023.
-          </li>
-          <li style="margin-bottom: 15px;">
-            Xinyu Zhang, Weiyu Sun, <strong>Hao Lu</strong>, Ying Chen, et al.<br>
-            <em>Self-similarity Prior Distillation for Unsupervised Remote Physiological Measurement.</em><br>
-            TMM 2023.
-          </li>
-          <li style="margin-bottom: 15px;">
-            Qingyong Hu, Qian Zhang, <strong>Hao Lu</strong>, Shun Wu, et al.<br>
-            <em>Contactless Arterial Blood Pressure Waveform Monitoring with mmWave Radar.</em><br>
-            ACM IMWUT 2024.
-          </li>
-          <li style="margin-bottom: 15px;">
-            Xin Liu, Yuting Zhang, Zitong Yu, <strong>Hao Lu</strong>, et al.<br>
-            <em>rPPG-MAE: Self-supervised Pre-training with Masked Autoencoders for Remote Physiological Measurement.</em><br>
-            TMM, 2024.
-          </li>
-          <li style="margin-bottom: 15px;">
-            XiaoBai Li, Hu Han, <strong>Hao Lu</strong>, et al.<br>
-            <em>The 1st Challenge on Remote Physiological Signal Sensing.</em><br>
-            CVPR Workshops 2020: 314-315.
-          </li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+          <!-- 将原来的列表改为 div 容器，每个项目也是一个小格子 -->
+          <div style="width:100%; max-width:100%; margin: 0 auto; padding: 0 10px;">
+              
+              <div class="paper-card-simple">
+                Yifan Liu, Keyu Fan, Weihao Yu, Chenxin Li, <strong>Hao Lu</strong>, Yixuan Yuan.<br>
+                <em>MonoSplat: Generalizable 3D Gaussian Splatting from Monocular Depth Foundation Models.</em><br>
+                CVPR 2025.
+              </div>
 
+              <div class="paper-card-simple">
+                Tianshuo Xu, <strong>Hao Lu</strong>, XU Yan, Yingjie Cai, et al.<br>
+                <em>Occ-LLM: Enhancing Autonomous Driving with Occupancy-Based Large Language Models.</em><br>
+                ICRA 2025.
+              </div>
 
+              <div class="paper-card-simple">
+                Jiaqi Tang, <strong>Hao Lu</strong>, Xiaogang Xu, Ruizheng Wu, et al.<br>
+                <em>An Incremental Unified Framework for Small Defect Inspection.</em><br>
+                ECCV 2024.
+              </div>
 
-          
-           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+              <div class="paper-card-simple">
+                Haodong Li, <strong>Hao Lu</strong>, Yingcong Chen.<br>
+                <em>Bi-TTA: Bidirectional Test-Time Adapter for Remote Physiological Measurement.</em><br>
+                ECCV 2024.
+              </div>
+
+              <div class="paper-card-simple">
+                Jiyao Wang, <strong>Hao Lu</strong>, Hu Han, Yingcong Chen, et al.<br>
+                <em>Generalizable Remote Physiological Measurement via Semantic-Sheltered Alignment and Plausible Style Randomization.</em><br>
+                IEEE JBHI 2024.
+              </div>
+
+              <div class="paper-card-simple">
+                Jiyao Wang, <strong>Hao Lu</strong>, Ange Wang, Yingcong Chen, et al.<br>
+                <em>Hierarchical Style-Aware Domain Generalization for Remote Physiological Measurement.</em><br>
+                IEEE TIM 2024.
+              </div>
+
+              <div class="paper-card-simple">
+                Weiyu Sun, Xinyu Zhang, <strong>Hao Lu</strong>, Ying-Cong Chen, et al.<br>
+                <em>Backdoor Contrastive Learning via Bi-level Trigger Optimization.</em><br>
+                ICLR 2024.
+              </div>
+
+              <div class="paper-card-simple">
+                Weiyu Sun, Xinyu Zhang, <strong>Hao Lu</strong>, Ying Chen, Yun Ge, et al.<br>
+                <em>Resolve Domain Conflicts for Generalizable Remote Physiological Measurement.</em><br>
+                ACM MM 2023.
+              </div>
+
+              <div class="paper-card-simple">
+                Xinyu Zhang, Weiyu Sun, <strong>Hao Lu</strong>, Ying Chen, et al.<br>
+                <em>Self-similarity Prior Distillation for Unsupervised Remote Physiological Measurement.</em><br>
+                TMM 2023.
+              </div>
+
+              <div class="paper-card-simple">
+                Qingyong Hu, Qian Zhang, <strong>Hao Lu</strong>, Shun Wu, et al.<br>
+                <em>Contactless Arterial Blood Pressure Waveform Monitoring with mmWave Radar.</em><br>
+                ACM IMWUT 2024.
+              </div>
+
+              <div class="paper-card-simple">
+                Xin Liu, Yuting Zhang, Zitong Yu, <strong>Hao Lu</strong>, et al.<br>
+                <em>rPPG-MAE: Self-supervised Pre-training with Masked Autoencoders for Remote Physiological Measurement.</em><br>
+                TMM, 2024.
+              </div>
+
+              <div class="paper-card-simple">
+                XiaoBai Li, Hu Han, <strong>Hao Lu</strong>, et al.<br>
+                <em>The 1st Challenge on Remote Physiological Signal Sensing.</em><br>
+                CVPR Workshops 2020: 314-315.
+              </div>
+
+          </div>
+
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto; margin-top:20px;">
             <tbody>
               <tr>
                 <td style="text-indent:20px;width:100%;vertical-align:middle">
-                  <p>*Equal contribution&nbsp;&nbsp;.</p>
+                  <p>*Equal contribution.</p>
                 </td>
               </tr>
             </tbody>
           </table>
 
           <!-- Honors and Awards Section -->
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr>
-                <td style="padding:20px;width:100%;vertical-align:middle">
-                  <heading>Honors and Awards</heading>
-                  <ul>
-                    <li>The 1st Place in RoboDrive, IEEE Conference on Robotics and Automation (ICRA2024)</li>
-                    <li>The first prize in China (0.2%), The Chinese Mathematics Competitions (CMC2016)</li><!-- More awards can be added -->
-                  </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <!-- 同样使用卡片风格 -->
+          <div class="paper-card" style="margin-top: 30px;">
+              <heading style="font-size:1.2em; display:block; margin-bottom:15px;">Honors and Awards</heading>
+              <ul>
+                <li style="margin-bottom:8px;">The 1st Place in RoboDrive, IEEE Conference on Robotics and Automation (ICRA2024)</li>
+                <li>The first prize in China (0.2%), The Chinese Mathematics Competitions (CMC2016)</li>
+              </ul>
+          </div>
           
           <!-- Footer -->
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
@@ -391,5 +467,4 @@
     &copy; Hao Lu | Last updated: Feb. 10, 2025.
   </center></p>
 </body>
-
 </html>
