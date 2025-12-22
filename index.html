@@ -11,11 +11,72 @@
   <link rel="icon" type="image/png" href="Images/icon.png">
 
   <style>
+    /* 全局滚动行为：丝滑滚动 */
+    html {
+        scroll-behavior: smooth;
+    }
+
     /* 网页背景改为极淡的灰色，让白色卡片更凸显 */
     body {
         background-color: #f9f9f9;
         font-family: 'Lato', Verdana, Helvetica, sans-serif;
         color: #333;
+        margin: 0; /* 去除默认边距，保证导航栏贴顶 */
+    }
+
+    /* --- 2.A 新增：顶部悬浮导航栏 --- */
+    #navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95); /* 半透明白底 */
+        backdrop-filter: blur(10px); /* 毛玻璃特效 */
+        border-bottom: 1px solid #eee;
+        padding: 15px 0;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+    .nav-content {
+        max-width: 850px;
+        margin: 0 auto;
+        display: flex;
+        gap: 25px;
+        padding-left: 20px; /* 移动端适配 */
+    }
+    .nav-content a {
+        color: #555;
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: color 0.2s ease;
+    }
+    .nav-content a:hover {
+        color: #1a73e8; /* 悬停变蓝 */
+        text-decoration: none;
+    }
+
+    /* --- 1.A 新增：会议徽章样式 --- */
+    .conf-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        margin-right: 6px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #c53030;       /* 默认文字红 */
+        background-color: #fff5f5; /* 默认背景淡红 */
+        border: 1px solid #fc8181;
+        border-radius: 4px;
+        font-style: normal;
+        vertical-align: middle;
+        margin-bottom: 2px;
+    }
+    
+    /* 变体：灰色徽章 (用于 arXiv / Preprint) */
+    .conf-badge.gray {
+        color: #4a5568;
+        background-color: #edf2f7;
+        border-color: #cbd5e0;
     }
 
     #full {
@@ -26,17 +87,16 @@
     .paper-card {
         width: 100%;
         background-color: #ffffff;
-        border: 1px solid #e0e0e0; /* 灰色边框 */
-        border-radius: 12px;       /* 圆角 */
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* 立体阴影 */
-        margin-bottom: 25px;       /* 卡片之间的间距 */
-        padding: 20px;             /* 卡片内部留白 */
+        border: 1px solid #e0e0e0; 
+        border-radius: 12px;       
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+        margin-bottom: 25px;       
+        padding: 20px;             
         border-spacing: 0;
         border-collapse: separate;
-        transition: transform 0.3s ease, box-shadow 0.3s ease; /* 动画过渡 */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; 
     }
 
-    /* 鼠标悬停时的效果：上浮 + 阴影加深 */
     .paper-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 20px rgba(0,0,0,0.12);
@@ -47,7 +107,7 @@
     .paper-card-simple {
         background-color: #ffffff;
         border: 1px solid #e0e0e0;
-        border-left: 5px solid #888; /* 左侧加深条纹，增加设计感 */
+        border-left: 5px solid #888; 
         border-radius: 8px;
         box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         margin-bottom: 15px;
@@ -56,7 +116,7 @@
     }
 
     .paper-card-simple:hover {
-        transform: translateX(5px); /* 悬停时轻微右移 */
+        transform: translateX(5px); 
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         background-color: #fffdfd;
     }
@@ -78,7 +138,7 @@
         text-decoration: underline;
     }
 
-    /* 个人资料区域卡片化 (可选，保持风格统一) */
+    /* 个人资料区域卡片化 */
     .profile-section {
         background: white;
         padding: 20px;
@@ -86,10 +146,28 @@
         box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         margin-bottom: 40px;
     }
+    
+    /* 调整Heading间距，防止被导航栏遮挡 (锚点偏移) */
+    .anchor-offset {
+        scroll-margin-top: 80px;
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- ======================== -->
+  <!--    顶部导航栏 (新增)     -->
+  <!-- ======================== -->
+  <nav id="navbar">
+    <div class="nav-content">
+        <a href="#">Home</a>
+        <a href="#internships">Experience</a>
+        <a href="#papers">Papers</a>
+        <a href="#awards">Awards</a>
+    </div>
+  </nav>
+
   <table style="width:100%;max-width:850px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
     <tbody>
       <tr>
@@ -131,12 +209,11 @@
           </div>
 
 
-              
           <!-- ====================================================== -->
           <!--                  Internship Section                    -->
           <!-- ====================================================== -->
-          
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <!-- 添加了 ID 和 anchor-offset 以配合导航栏跳转 -->
+          <table id="internships" class="anchor-offset" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
               <tr>
                 <td style="text-indent:20px;width:100%;vertical-align:middle">
@@ -151,7 +228,6 @@
             <tbody>
               <tr>
                 <td style="padding:10px;width:25%;vertical-align:middle" align="center">
-                  <!-- 长方形 Logo 适配：增加 max-width，使用 auto height -->
                   <img src="Images/seed0.png" style="width:100%; max-width:160px; height:auto; object-fit:contain;" alt="ByteDance Logo">
                 </td>
                 <td style="padding:10px;width:75%;vertical-align:middle">
@@ -218,7 +294,8 @@
   
           
           <!-- Selected Papers Section -->
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <!-- 添加了 ID 和 anchor-offset -->
+          <table id="papers" class="anchor-offset" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
               <tr>
                 <td style="text-indent:20px;width:100%;vertical-align:middle">
@@ -228,18 +305,11 @@
             </tbody>
           </table>
       
-          <!-- 
-             每个论文现在都被包裹在一个独立的 <table class="paper-card"> 中 
-             这实现了你想要的“独立小格子”和“立体感灰色边框”
-          -->
-
-          <!-- Paper 1 -->
           <!-- Paper 1: UniUGP -->
           <table class="paper-card">
             <tbody>    
                 <tr>
                 <td style="padding:10px;width:25%;vertical-align:middle" align="center">
-                    <!-- 替换图片为视频 s1.mp4 -->
                     <video width="100%" playsinline="" autoplay="" loop="" preload="" muted="" class="paper-img">
                         <source src="Images/Reasoning.mov" type="video/mov">
                     </video>
@@ -247,7 +317,9 @@
                 <td style="padding:10px;width:75%;vertical-align:middle">
                     <papertitle style="font-size: 1.1rem; font-weight: bold;">UniUGP: Unifying Understanding, Generation, and Planning For End-to-end Autonomous Driving.</papertitle><br>
                     <b>Hao Lu*</b>, Ziyang Liu*, Guangfeng Jiang, Yuanfei Luo, et al.
-                    <br><em><strong>arXiv:2512.09864</strong></em>.
+                    <br>
+                    <!-- 使用灰色徽章 for arXiv -->
+                    <span class="conf-badge gray">arXiv:2512.09864</span>
                     <br>
                     <a href="https://arxiv.org/abs/2512.09864">[Paper]</a>
                     <a href="https://seed-uniugp.github.io/">[Homepage]</a>
@@ -261,7 +333,6 @@
             <tbody>    
                 <tr>
                 <td style="padding:10px;width:25%;vertical-align:middle" align="center">
-                    <!-- 替换图片为视频 s2.mp4 -->
                     <video width="100%" playsinline="" autoplay="" loop="" preload="" muted="" class="paper-img">
                         <source src="Images/S1.mp4" type="video/mp4">
                     </video>
@@ -269,7 +340,8 @@
                 <td style="padding:10px;width:75%;vertical-align:middle">
                     <papertitle style="font-size: 1.1rem; font-weight: bold;">4D Driving Scene Generation With Stereo Forcing.</papertitle><br>
                     <b>Hao Lu*</b>, Zhuang Ma*, Guangfeng Jiang, Wenhang Ge, et al.
-                    <br><em><strong>arXiv:2509.20251</strong></em>.
+                    <br>
+                    <span class="conf-badge gray">arXiv:2509.20251</span>
                     <br>
                     <a href="https://arxiv.org/abs/2509.20251">[Paper]</a>
                     <a href="https://jiangxb98.github.io/PhiGensis/">[Homepage]</a>
@@ -278,7 +350,7 @@
             </tbody>
           </table>
 
-          
+          <!-- Paper: DrivingRecon -->
           <table class="paper-card">
             <tbody>    
                 <tr>
@@ -288,7 +360,9 @@
                 <td style="padding:10px;width:75%;vertical-align:middle">
                     <papertitle style="font-size: 1.1rem; font-weight: bold;">DrivingRecon: Large 4D Gaussian Reconstruction Model For Autonomous Driving.</papertitle><br>
                     <b>Hao Lu</b>, Tianshuo Xu, Wenzhao Zheng, Yunpeng Zhang, et al.
-                    <br><em><strong>NeurIPS 2025</strong></em>.
+                    <br>
+                    <!-- 使用红色徽章 for NeurIPS -->
+                    <span class="conf-badge">NeurIPS 2025</span>
                     <br>
                     <a href="https://arxiv.org/pdf/2412.09043">[Paper]</a>
                     <a href="https://github.com/EnVision-Research/DriveRecon">[Code]</a>
@@ -297,7 +371,7 @@
             </tbody>
           </table>
 
-          <!-- Paper 2 -->
+          <!-- Paper: Period-LLM -->
           <table class="paper-card">
             <tbody>    
                 <tr>
@@ -307,7 +381,8 @@
                 <td style="padding:10px;width:75%;vertical-align:middle">
                     <papertitle style="font-size: 1.1rem; font-weight: bold;">Period-LLM: Extending the Periodic Capability of Multimodal Large Language Model.</papertitle><br>
                     Yuting Zhang*, <b>Hao Lu*</b>, Qingyong Hu, Yin Wang, et al.
-                    <br><em><strong>CVPR 2025</strong></em>.
+                    <br>
+                    <span class="conf-badge">CVPR 2025</span>
                     <br>
                     <a href="https://arxiv.org/pdf/2505.24476">[Paper]</a>
                     <a href="https://github.com/keke-nice/Period-LLM">[Code]</a>
@@ -316,7 +391,7 @@
             </tbody>
           </table>
 
-          <!-- Paper 3 -->
+          <!-- Paper: Hawk -->
           <table class="paper-card">
             <tbody>    
                 <tr>
@@ -326,7 +401,8 @@
                 <td style="padding:10px;width:75%;vertical-align:middle">
                     <papertitle style="font-size: 1.1rem; font-weight: bold;">Hawk: Learning to Understand Open-World Video Anomalies.</papertitle><br>
                     Jiaqi Tang*, <b>Hao Lu*</b>, Ruizheng Wu, Xiaogang Xu, et al.
-                    <br><em><strong>NeurIPS 2024</strong></em>
+                    <br>
+                    <span class="conf-badge">NeurIPS 2024</span>
                     <br>
                     <a href="https://arxiv.org/pdf/2405.16886">[Paper]</a>
                     <a href="https://github.com/jqtangust/hawk">[Code]</a>
@@ -335,6 +411,7 @@
             </tbody>
           </table>
 
+          <!-- Paper: Occ-LLM -->
           <table class="paper-card">
             <tbody>    
                 <tr>
@@ -344,7 +421,8 @@
                 <td style="padding:10px;width:75%;vertical-align:middle">
                     <papertitle style="font-size: 1.1rem; font-weight: bold;">Occ-LLM: Enhancing Autonomous Driving with Occupancy-Based Large Language Models.</papertitle><br>
                     Tianshuo Xu, <strong>Hao Lu</strong>, XU Yan, Yingjie Cai, et al.
-                    <br><em><strong>ICRA 2025.</strong></em>
+                    <br>
+                    <span class="conf-badge">ICRA 2025</span>
                     <br>
                     <a href="https://arxiv.org/abs/2502.06419">[Paper]</a>
                     <a href="https://github.com/jqtangust/hawk">[Code]</a>
@@ -354,7 +432,7 @@
           </table>
 
 
-          <!-- Paper 4 -->
+          <!-- Paper: Sage Deer -->
           <table class="paper-card">
             <tbody>    
                 <tr>
@@ -364,15 +442,15 @@
                 <td style="padding:10px;width:75%;vertical-align:middle">
                     <papertitle style="font-size: 1.1rem; font-weight: bold;">Sage Deer: A Super-Aligned Driving Generalist Is Your Cockpit.</papertitle><br>
                     <b>Hao Lu*</b>, Jiaqi Tang*, Jiyao Wang, Yunfan Lu, et al.
-                    <br><em><strong>preprint</strong></em>. 
                     <br>
-                    <!-- <a href="https://arxiv.org/abs/2505.10257">[Paper]</a> -->
+                    <span class="conf-badge gray">Preprint</span>
+                    <br>
                 </td>
                 </tr>
             </tbody>
           </table>
 
-          <!-- Paper 5 -->
+          <!-- Paper: Generalizable Multi-Camera -->
           <table class="paper-card">
             <tbody>    
                 <tr>
@@ -382,7 +460,8 @@
                 <td style="padding:10px;width:75%;vertical-align:middle">
                     <papertitle style="font-size: 1.1rem; font-weight: bold;">Towards Generalizable Multi-Camera 3D Object Detection via Perspective Debiasing.</papertitle><br>
                     <b>Hao Lu</b>, Yunpeng Zhang, Qing Lian, Dalong Du, et al.
-                    <br><em><strong>AAAI 2024</strong></em>.
+                    <br>
+                    <span class="conf-badge">AAAI 2024</span>
                     <br>
                     <a href="https://arxiv.org/pdf/2310.11346">[Paper]</a>
                     <a href="https://github.com/EnVision-Research/Generalizable-BEV">[Code]</a>
@@ -391,7 +470,7 @@
             </tbody>
           </table>
 
-          <!-- Paper 6 -->
+          <!-- Paper: Scaling Multi-Camera -->
           <table class="paper-card">
             <tbody>    
                 <tr>
@@ -401,7 +480,8 @@
                 <td style="padding:10px;width:75%;vertical-align:middle">
                     <papertitle style="font-size: 1.1rem; font-weight: bold;">Scaling Multi-Camera 3D Object Detection through Weak-to-Strong Eliciting.</papertitle><br>
                     <b>Hao Lu</b>, Jiaqi Tang, Xinli Xu, Xu Cao, et al.
-                    <br>(preprint)
+                    <br>
+                    <span class="conf-badge gray">Preprint</span>
                     <br>
                     <a href="https://arxiv.org/pdf/2404.06700">[Paper]</a>
                     <a href="https://github.com/EnVision-Research/Scale-BEV">[Code]</a>
@@ -410,7 +490,7 @@
             </tbody>
           </table>
 
-          <!-- Paper 8 -->
+          <!-- Paper: GPT as Psychologist -->
           <table class="paper-card">
             <tbody>    
                 <tr>
@@ -420,7 +500,8 @@
                 <td style="padding:10px;width:75%;vertical-align:middle">
                     <papertitle style="font-size: 1.1rem; font-weight: bold;">GPT as Psychologist? Preliminary Evaluations for GPT-4V on Visual Affective Computing.</papertitle><br>
                     <b>Hao Lu*</b>, Xuesong Niu*, Jiyao Wang*, Yin Wang*, Qingyong Hu* et al.
-                    <br><em><strong>CVPR Workshops 2024</strong></em>
+                    <br>
+                    <span class="conf-badge">CVPR Workshops 2024</span>
                     <br>
                     <a href="https://arxiv.org/abs/2403.05916">[Paper]</a>
                     <a href="https://github.com/EnVision-Research/GPT4Affectivity">[Code]</a>
@@ -429,7 +510,7 @@
             </tbody>
           </table>
 
-          <!-- Paper 9 -->
+          <!-- Paper: NEST -->
           <table class="paper-card">
             <tbody>    
                 <tr>
@@ -439,7 +520,8 @@
                 <td style="padding:10px;width:75%;vertical-align:middle">
                     <papertitle style="font-size: 1.1rem; font-weight: bold;">Neuron Structure Modeling for Generalizable Remote Physiological Measurement.</papertitle><br>
                     <b>Hao Lu</b>, Zitong Yu, Xuesong Niu, Yingcong Chen.
-                    <br><em><strong>CVPR 2023</strong></em>
+                    <br>
+                    <span class="conf-badge">CVPR 2023</span>
                     <br>
                     <a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Lu_Neuron_Structure_Modeling_for_Generalizable_Remote_Physiological_Measurement_CVPR_2023_paper.pdf">[Paper]</a>
                     <a href="https://github.com/EnVision-Research/NEST-rPPG">[Code]</a>
@@ -448,7 +530,7 @@
             </tbody>
           </table>
 
-          <!-- Paper 10 -->
+          <!-- Paper: Dual-GAN -->
           <table class="paper-card">
             <tbody>    
                 <tr>
@@ -458,7 +540,8 @@
                 <td style="padding:10px;width:75%;vertical-align:middle">
                     <papertitle style="font-size: 1.1rem; font-weight: bold;">Dual-GAN: Joint BVP and Noise modelling for Remote Physiological Measurement.</papertitle><br>
                     <b>Hao Lu</b>, Hu Han, S. Kevin Zhou.
-                    <br><em><strong>CVPR 2021</strong></em>
+                    <br>
+                    <span class="conf-badge">CVPR 2021</span>
                     <br>
                     <a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Lu_Dual-GAN_Joint_BVP_and_Noise_Modeling_for_Remote_Physiological_Measurement_CVPR_2021_paper.pdf">[Paper]</a>
                 </td>
@@ -480,8 +563,8 @@
           </table>
 
           <!-- Honors and Awards Section -->
-          <!-- 同样使用卡片风格 -->
-          <div class="paper-card" style="margin-top: 30px;">
+          <!-- 添加了 ID 和 anchor-offset -->
+          <div id="awards" class="paper-card anchor-offset" style="margin-top: 30px;">
               <heading style="font-size:1.2em; display:block; margin-bottom:15px;">Honors and Awards</heading>
               <ul>
                 <li style="margin-bottom:8px;">The 1st Place in RoboDrive, IEEE Conference on Robotics and Automation (ICRA2024)</li>
